@@ -44,38 +44,55 @@ export default class SearchBoxContainer extends React.Component<ISearchBoxContai
 
         return (
             <div className={styles.searchBoxWrapper}>
-                <SearchBox
-                    componentRef={searchBoxRef}
-                    placeholder={this.props.placeholderText ? this.props.placeholderText : webPartStrings.SearchBox.DefaultPlaceholder}
-                    ariaLabel={this.props.placeholderText ? this.props.placeholderText : webPartStrings.SearchBox.DefaultPlaceholder}
-                    className={styles.searchTextField}
-                    value={this.state.searchInputValue}
-                    autoComplete="off"
-                    onChange={(event) => {
-                        const newInputValue = event && event.currentTarget ? event.currentTarget.value : "";
-                        const inputChanged = !isEmpty(this.state.searchInputValue) && isEmpty(newInputValue);
+                <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: '8px' }}>
+                    <div style={{ flex: 7 }}>
 
-                        if (this.props.reQueryOnClear && inputChanged) {
-                            this._onSearch('', true);
-                            searchBoxRef.current.focus();
-                        } else {
-                            this.setState({ searchInputValue: newInputValue });
-                        }
-                    }}
-                    onSearch={() => this._onSearch(this.state.searchInputValue)}
-                    onClear={() => {
-                        this._onSearch('', true);
-                        searchBoxRef.current.focus();
-                    }}
-                />
-                <div className={styles.searchButton}>
-                    {this.state.searchInputValue &&
-                        <IconButton
-                            onClick={() => this._onSearch(this.state.searchInputValue)}
-                            iconProps={{ iconName: 'Forward' }}
-                            ariaLabel={webPartStrings.SearchBox.SearchButtonLabel}
+                        <SearchBox
+                            componentRef={searchBoxRef}
+                            placeholder={this.props.placeholderText ? this.props.placeholderText : webPartStrings.SearchBox.DefaultPlaceholder}
+                            ariaLabel={this.props.placeholderText ? this.props.placeholderText : webPartStrings.SearchBox.DefaultPlaceholder}
+                            className={styles.searchTextField}
+                            value={this.state.searchInputValue}
+                            autoComplete="off"
+                            onChange={(event) => {
+                                const newInputValue = event && event.currentTarget ? event.currentTarget.value : "";
+                                const inputChanged = !isEmpty(this.state.searchInputValue) && isEmpty(newInputValue);
+
+                                if (this.props.reQueryOnClear && inputChanged) {
+                                    this._onSearch('', true);
+                                    searchBoxRef.current.focus();
+                                } else {
+                                    this.setState({ searchInputValue: newInputValue });
+                                }
+                            }}
+                            onSearch={() => this._onSearch(this.state.searchInputValue)}
+                            onClear={() => {
+                                this._onSearch('', true);
+                                searchBoxRef.current.focus();
+                            }}
+                            styles={{ root: { height: '100%',input:{ border: '1px solid grey' }} }}
                         />
-                    }
+                    </div>
+                    <div style={{ flex: 3, display: 'flex', justifyContent: 'space-between' }}>
+                        <input
+                            type="submit"
+                            value="Search"
+                            className="button js-form-submit form-submit btn btn-primary"
+                            style={{ width: '48%', backgroundColor: '#0078d4', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px' }}
+                            onClick={() => this._onSearch(this.state.searchInputValue)}
+                        />
+                        <input
+                            type="submit"
+                            value="Clear All"
+                            className="button js-form-submit form-submit btn btn-secondary"
+                            style={{ width: '48%', backgroundColor: '#f3f2f1', color: '#323130', border: 'none', borderRadius: '4px', padding: '10px' }}
+                            onClick={() => {
+                                this.setState({ searchInputValue: '' });
+                                this._onSearch('', true);
+                            }}
+                        />
+                    </div>
+                          
                 </div>
             </div>
         );

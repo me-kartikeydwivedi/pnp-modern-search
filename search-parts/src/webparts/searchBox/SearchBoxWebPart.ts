@@ -100,6 +100,7 @@ export default class SearchBoxWebPart extends BaseWebPart<ISearchBoxWebPartProps
     }
 
     protected async onInit() {
+        // alert('okokokokokokokkokokokkokokokok')
         try {
             // Disable PnP Telemetry
             const telemetry = PnPTelemetry.getInstance();
