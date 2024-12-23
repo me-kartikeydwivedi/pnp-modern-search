@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ISearchResultsContainerProps } from './ISearchResultsContainerProps';
 import { ISearchResultsContainerState } from './ISearchResultsContainerState';
-import { TemplateRenderer } from "../../../controls/TemplateRenderer/TemplateRenderer";
+
+// import { TemplateRenderer } from "../../../controls/TemplateRenderer/TemplateRenderer";
 import { Shimmer, ShimmerElementType as ElemType, ShimmerElementsGroup, SelectionZone, Selection, SelectionMode } from '@fluentui/react';
 import { isEqual, cloneDeep, merge, isEmpty } from "@microsoft/sp-lodash-subset";
 import { ITemplateService } from '../../../services/templateService/ITemplateService';
@@ -17,6 +18,7 @@ import { ObjectHelper } from '../../../helpers/ObjectHelper';
 import { BuiltinLayoutsKeys } from '../../../layouts/AvailableLayouts';
 import { WebPartTitle } from '@pnp/spfx-controls-react/lib/WebPartTitle';
 import * as webPartStrings from 'SearchResultsWebPartStrings';
+import TemplateRendererFC from '../../../controls/TemplateRenderer/TemplateRendererFC';
 
 const LogSource = "SearchResultsContainer";
 
@@ -114,7 +116,7 @@ export default class SearchResultsContainer extends React.Component<ISearchResul
         renderTemplate = <SelectionZone
             selection={this._selection}
             selectionMode={selectionMode}>
-            <TemplateRenderer
+            <TemplateRendererFC
                 templateContent={templateContent}
                 templateContext={templateContext}
                 templateService={this.templateService}
@@ -166,7 +168,7 @@ export default class SearchResultsContainer extends React.Component<ISearchResul
                 templateContent = this.templateService.getPlaceholderMarkup(this.props.templateContent);
 
                 if (templateContent) {
-                    renderShimmerElements = <TemplateRenderer
+                    renderShimmerElements = <TemplateRendererFC
                         templateContent={templateContent}
                         templateContext={this.getTemplateContext()}
                         templateService={this.templateService}

@@ -44,7 +44,7 @@ export default class SearchBoxContainer extends React.Component<ISearchBoxContai
 
         return (
             <div className={styles.searchBoxWrapper}>
-                <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: '8px', margin: '0 16px' }}>
                     <div style={{ flex: 7 }}>
 
                         <SearchBox
@@ -70,29 +70,26 @@ export default class SearchBoxContainer extends React.Component<ISearchBoxContai
                                 this._onSearch('', true);
                                 searchBoxRef.current.focus();
                             }}
-                            styles={{ root: { height: '100%',input:{ border: '1px solid grey' }} }}
+                            styles={{ root: { height: '100%',border: '1px solid grey !important'  } }}
                         />
                     </div>
-                    <div style={{ flex: 3, display: 'flex', justifyContent: 'space-between' }}>
+                    <div className={styles.buttonContainer}>
                         <input
                             type="submit"
                             value="Search"
-                            className="button js-form-submit form-submit btn btn-primary"
-                            style={{ width: '48%', backgroundColor: '#0078d4', color: '#fff', border: 'none', borderRadius: '4px', padding: '10px' }}
+                            className={`button js-form-submit form-submit btn btn-primary ${styles.primaryButton}`}
                             onClick={() => this._onSearch(this.state.searchInputValue)}
                         />
                         <input
                             type="submit"
                             value="Clear All"
-                            className="button js-form-submit form-submit btn btn-secondary"
-                            style={{ width: '48%', backgroundColor: '#f3f2f1', color: '#323130', border: 'none', borderRadius: '4px', padding: '10px' }}
+                            className={`button js-form-submit form-submit btn btn-secondary ${styles.secondaryButton}`}
                             onClick={() => {
                                 this.setState({ searchInputValue: '' });
                                 this._onSearch('', true);
                             }}
-                        />
+                        /> 
                     </div>
-                          
                 </div>
             </div>
         );

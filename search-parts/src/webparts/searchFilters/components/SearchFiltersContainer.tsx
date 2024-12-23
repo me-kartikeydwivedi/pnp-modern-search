@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ISearchFiltersContainerProps } from './ISearchFiltersContainerProps';
-import { TemplateRenderer } from '../../../controls/TemplateRenderer/TemplateRenderer';
+import  TemplateRendererFC from '../../../controls/TemplateRenderer/TemplateRendererFC';
+// import { TemplateRenderer } from '../../../controls/TemplateRenderer/TemplateRenderer';
 import { ISearchFiltersContainerState } from './ISearchFiltersContainerState';
 import { isEqual, cloneDeep, sortBy } from '@microsoft/sp-lodash-subset';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
@@ -75,7 +76,7 @@ export default class SearchFiltersContainer extends React.Component<ISearchFilte
       templateContent = this.props.templateService.getTemplateMarkup(this.props.templateContent);
       const templateContext = this.getTemplateContext();
 
-      renderWpContent = <TemplateRenderer
+      renderWpContent = <TemplateRendererFC
         key={JSON.stringify(templateContext)}
         templateContent={templateContent}
         templateContext={templateContext}
